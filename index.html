@@ -146,6 +146,10 @@
                             <div> </div>
                             <div>Asa karta hun iss saal apke khali dimag mein kuch ache bharti ho..</div>
                             <div>Aur...aap thode se lambe ho jao...🐖</div>
+                            <div>
+
+                            </div>
+                            <div>⚡⚡⚡⚡⚡⚡⚡⚡⚡</div>
                         </h2>
 
                         <div class="imageCute2">
@@ -156,6 +160,7 @@
             </div>
         </div>
     </div>
+    <audio id="bg-music" src="audio/music.mp3"></audio>
 
 </body>
 <script>
@@ -189,45 +194,53 @@
     var intervalContent;
     var intervalTitle;
     $("#btn__letter").on("click", function () {
+         document.getElementById("bg-music").play();
+
         $(".box__letter").slideDown()
         setTimeout(function () {
             $(".letter__border").slideDown();
         }, 1000)
-        setTimeout(function () {
-            intervalTitle = setInterval(function () {
-                if (currentIndexTitle < charArrTitle.length) {
-                    document.querySelector(".title__letter").textContent += charArrTitle[currentIndexTitle];
-                    let i = document.createElement("i");
-                    i.className = "fa-solid fa-heart"
-                    document.querySelector(".title__letter").appendChild(i)
-                    currentIndexTitle++;
-                }
-                else {
-                    clearInterval(intervalTitle)
-                }
-            }, 100)
-        }, 2000)
-        setTimeout(function () {
-            document.querySelector("#heart__letter").classList.add("animationOp");
-            document.querySelector(".love__img").classList.add("animationOp");
-            document.querySelector("#mewmew").classList.add("animationOp");
-        }, 2800)
-        setTimeout(function () {
-            document.querySelectorAll(".heart").forEach((item) => {
-                item.classList.add("animation")
-            })
-        }, 3500)
-        setTimeout(function () {
-            intervalContent = setInterval(function () {
-                if (currentIndexLetter < charArrDateLetter.length) {
-                    text__letter.textContent += charArrDateLetter[currentIndexLetter];
-                    currentIndexLetter++;
-                }
-                else {
-                    clearInterval(intervalContent)
-                }
-            }, 50)
-        }, 6000)
+        $("#btn__letter").on("click", function () {
+    $(".box__letter").slideDown();
+    setTimeout(function () {
+        $(".letter__border").slideDown();
+    }, 300);
+
+    // Play music
+    document.getElementById("bg-music").play();
+
+    // Reset typing
+    document.querySelector(".title__letter").textContent = "";
+    text__letter.textContent = "";
+    currentIndexLetter = 0;
+    currentIndexTitle = 0;
+
+    // Start title typing immediately
+    intervalTitle = setInterval(function () {
+        if (currentIndexTitle < charArrTitle.length) {
+            document.querySelector(".title__letter").textContent += charArrTitle[currentIndexTitle];
+            currentIndexTitle++;
+        } else {
+            clearInterval(intervalTitle);
+        }
+    }, 80);
+
+    // Fade-in images instantly
+    document.querySelector("#heart__letter").classList.add("animationOp");
+    document.querySelector(".love__img").classList.add("animationOp");
+    document.querySelector("#mewmew").classList.add("animationOp");
+
+    // Start content typing faster
+    intervalContent = setInterval(function () {
+        if (currentIndexLetter < charArrDateLetter.length) {
+            text__letter.textContent += charArrDateLetter[currentIndexLetter];
+            currentIndexLetter++;
+        } else {
+            clearInterval(intervalContent);
+        }
+    }, 15);
+});
+
     })
     $(".close").on("click", function () {
         clearInterval(intervalContent)
@@ -256,9 +269,20 @@
     }
 
     close.addEventListener('click', function () {
-        boxmail.classList.remove('active')
-    })
+    boxmail.classList.remove('active');
+
+    document.getElementById("bg-music").pause();
+    document.getElementById("bg-music").currentTime = 0;
+
+    clearInterval(intervalContent);
+    clearInterval(intervalTitle);
+
+    document.querySelector(".title__letter").textContent = "";
+    text__letter.textContent = "";
+    currentIndexLetter = 0;
+    currentIndexTitle = 0;
+});
+
 </script>
 
 </html>
-

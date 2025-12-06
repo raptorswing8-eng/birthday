@@ -225,10 +225,14 @@ body {
 }
 .name{
     position: absolute;
-    padding: 0px 20px;
     bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0px 20px;
     border: 3px solid var(--color-black);
     font-family: 'Dancing Script', cursive;
+    white-space: nowrap;
+
 }
 .date__of__birth span, .name span{
     font-weight: bold;
